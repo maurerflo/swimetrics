@@ -6,21 +6,29 @@ export default defineNuxtConfig({
   workspaceDir: '../../',
   srcDir: 'src',
   devtools: { enabled: true },
+
   devServer: {
     host: 'localhost',
     port: 4200,
   },
+
   typescript: {
     typeCheck: true,
     tsConfig: {
       extends: '../tsconfig.app.json', // Nuxt copies this string as-is to the `./.nuxt/tsconfig.json`, therefore it needs to be relative to that directory
     },
   },
+
   imports: {
     autoImport: true,
   },
+
   css: ['~/assets/css/styles.scss'],
+
   vite: {
     plugins: [nxViteTsPaths()],
   },
+
+  modules: ["@nuxtjs/tailwindcss"],
+  compatibilityDate: '2024-11-20'
 });
