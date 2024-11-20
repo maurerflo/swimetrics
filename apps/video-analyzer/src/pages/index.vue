@@ -1,3 +1,6 @@
 <template>
-  <NxWelcome title="video-analyzer" />
+  <VideoEditor />
 </template>
+<script setup lang="ts">
+import VideoEditor from '../components/VideoEditor.vue';
+</script>
