@@ -29,6 +29,9 @@ export default defineNuxtConfig({
     plugins: [nxViteTsPaths()],
   },
 
-  modules: ["@nuxtjs/tailwindcss"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@pinia/nuxt"
+  ],
   compatibilityDate: '2024-11-20'
 });
