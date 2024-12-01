@@ -12,7 +12,9 @@ module.exports = [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      'vue/valid-v-for': 'off',
+    },
   },
   ...compat.extends('@nuxt/eslint-config'),
   {

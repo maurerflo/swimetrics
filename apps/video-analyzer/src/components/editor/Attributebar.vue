@@ -1,5 +1,9 @@
 <template>
-  <div class="bg-gray-800 transition-all duration-300 h-screen">
+  <div
+    :class="[
+      'bg-gray-800 transition-all duration-300 h-screen',
+      isCollapsed ? 'hidden' : 'block']"
+  >
     <!-- Sidebar -->
     <div
       :class="[
@@ -9,8 +13,8 @@
       class="h-full flex flex-col"
     >
       <button
-        @click="toggleSidebar"
         class="p-4 focus:outline-none hover:bg-gray-700 transition-colors"
+        @click="toggleSidebar"
       >
         <span v-if="isCollapsed">☰</span>
         <span v-else>Collapse</span>
