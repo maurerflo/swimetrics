@@ -5,6 +5,7 @@ export type ShapeType = 'rectangle' | 'circle'
 export interface EditorState {
   canvas: Canvas | null
   selectedObject: FabricObject | null
+  zoomLevel: number
 }
 
 export interface ShapeOptions {

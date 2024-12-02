@@ -3,18 +3,20 @@ import { Canvas, CanvasOptions, FabricObject, FabricText } from 'fabric';
 import type { EditorState, ShapeType } from '../types/editor';
 import { createShape } from '../utils/shapes';
 import { createImage, createVideo } from '../utils/media';
+import type { TOptions } from 'fabric/src/typedefs';
 
 
 export const useEditorStore = defineStore('editor', {
   state: (): EditorState => ({
     canvas: null,
     selectedObject: null,
+    zoomLevel: 1,
   }),
 
   actions: {
     initializeCanvas(
       canvasElement: HTMLCanvasElement,
-      options: CanvasOptions
+      options: TOptions<CanvasOptions>
     ) {
       this.canvas = new Canvas(canvasElement, options);
       this.setupCanvasListeners();
@@ -39,6 +41,29 @@ export const useEditorStore = defineStore('editor', {
       this.canvas.on('selection:cleared', () => {
         this.selectedObject = null;
       });
+
+      this.canvas.on('mouse:wheel', this.zoomOnScrolling);
+    },
+
+    zoomOnScrolling(opt: { e: WheelEvent }): void {
+      const delta = opt.e.deltaY;
+      const pointer = this.canvas.getScenePoint(opt.e);
+      const zoom = this.zoomLevel - delta / 1000;
+
+      // Clamp zoom level to a range (e.g., 0.5 to 2.0)
+      this.zoomLevel = Math.min(Math.max(zoom, 0.5), 2.0);
+
+      // Apply the zoom level
+      this.canvas.zoomToPoint(pointer, this.zoomLevel);
+
+      // Prevent default scrolling behavior
+      opt.e.preventDefault();
+      opt.e.stopPropagation();
+    },
+
+    setZoom(level: number): void {
+      this.zoomLevel = level;
+      this.canvas.setZoom(level);
     },
 
     addShape(type: ShapeType): void {
