@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="selectedObject"
-    class="attribute-bar p-4 bg-gray-200 rounded shadow"
+    class="bg-gray-900 text-white"
   >
     <h3 class="font-bold mb-2">Selected Object Details</h3>
     <ul>
@@ -12,20 +12,11 @@
       <li><strong>Height:</strong> {{ selectedObject.height }}</li>
 
       {{
-        JSON.stringify(selectedObject)
+        JSON.stringify(selectedObject, null, 2)
       }}
     </ul>
-    <div class="mt-4">
-      <label class="block mb-1">Color:</label>
-      <input
-        type="color"
-        v-model="fillColor"
-        @input="updateObjectFill"
-        class="w-full border rounded"
-      />
-    </div>
   </div>
-  <div v-else class="attribute-bar p-4 bg-gray-200 rounded shadow">
+  <div v-else class="bg-gray-900 text-white">
     <p>No object selected</p>
   </div>
 </template>
@@ -36,21 +27,8 @@ import { useEditorStore } from '../../stores/editor';
 
 const editorStore = useEditorStore();
 const selectedObject = computed(() => editorStore.selectedObject);
-
-// // Reactive state for color input
-// const fillColor = ref(selectedObject.value?.fill || '#000000');
-//
-// // Update the fill color of the selected object
-// const updateObjectFill = () => {
-//   if (selectedObject.value) {
-//     selectedObject.value.set('fill', fillColor.value);
-//     editorStore.updateCanvas();
-//   }
-// };
 </script>
 
 <style scoped>
-.attribute-bar {
-  max-width: 300px;
-}
+
 </style>
