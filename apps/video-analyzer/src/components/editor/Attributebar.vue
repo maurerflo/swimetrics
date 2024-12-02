@@ -1,62 +1,56 @@
 <template>
   <div
-    :class="[
-      'bg-gray-800 transition-all duration-300 h-screen',
-      isCollapsed ? 'hidden' : 'block']"
+    v-if="selectedObject"
+    class="attribute-bar p-4 bg-gray-200 rounded shadow"
   >
-    <!-- Sidebar -->
-    <div
-      :class="[
-        'bg-gray-800 text-white transition-all duration-300',
-        isCollapsed ? 'w-16' : 'w-64',
-      ]"
-      class="h-full flex flex-col"
-    >
-      <button
-        class="p-4 focus:outline-none hover:bg-gray-700 transition-colors"
-        @click="toggleSidebar"
-      >
-        <span v-if="isCollapsed">☰</span>
-        <span v-else>Collapse</span>
-      </button>
+    <h3 class="font-bold mb-2">Selected Object Details</h3>
+    <ul>
+      <li><strong>Type:</strong> {{ selectedObject.type }}</li>
+      <li><strong>Left:</strong> {{ selectedObject.left }}</li>
+      <li><strong>Top:</strong> {{ selectedObject.top }}</li>
+      <li><strong>Width:</strong> {{ selectedObject.width }}</li>
+      <li><strong>Height:</strong> {{ selectedObject.height }}</li>
 
-      <!-- Sidebar Content -->
-      <nav class="flex-1">
-        <ul>
-          <li
-            v-for="item in menuItems"
-            :key="item.label"
-            class="p-4 hover:bg-gray-700 transition-colors cursor-pointer"
-          >
-            <span v-if="isCollapsed">{{ item.icon }}</span>
-            <span v-else>{{ item.label }}</span>
-          </li>
-        </ul>
-      </nav>
+      {{
+        JSON.stringify(selectedObject)
+      }}
+    </ul>
+    <div class="mt-4">
+      <label class="block mb-1">Color:</label>
+      <input
+        type="color"
+        v-model="fillColor"
+        @input="updateObjectFill"
+        class="w-full border rounded"
+      />
     </div>
-
-    <!-- Main Content -->
-    <div class="flex-1 bg-gray-100 p-6">
-      <slot />
-    </div>
+  </div>
+  <div v-else class="attribute-bar p-4 bg-gray-200 rounded shadow">
+    <p>No object selected</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed } from 'vue';
+import { useEditorStore } from '../../stores/editor';
 
-const isCollapsed = ref(false);
+const editorStore = useEditorStore();
+const selectedObject = computed(() => editorStore.selectedObject);
 
-const toggleSidebar = () => {
-  isCollapsed.value = !isCollapsed.value;
-};
-
-const menuItems = [
-  { label: 'Dashboard', icon: '📊' },
-  { label: 'Shapes', icon: '🔳' },
-  { label: 'Videos', icon: '🎥' },
-  { label: 'Settings', icon: '⚙️' },
-];
+// // Reactive state for color input
+// const fillColor = ref(selectedObject.value?.fill || '#000000');
+//
+// // Update the fill color of the selected object
+// const updateObjectFill = () => {
+//   if (selectedObject.value) {
+//     selectedObject.value.set('fill', fillColor.value);
+//     editorStore.updateCanvas();
+//   }
+// };
 </script>
 
-<style scoped></style>
+<style scoped>
+.attribute-bar {
+  max-width: 300px;
+}
+</style>
