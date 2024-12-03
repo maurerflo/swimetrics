@@ -34,6 +34,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
+    "@nuxt/icon"
   ],
   compatibilityDate: '2024-11-20'
 });
