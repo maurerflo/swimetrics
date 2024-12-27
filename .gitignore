@@ -3,7 +3,7 @@
 # compiled output
 dist
 tmp
-/out-tsc
+out-tsc
 
 # dependencies
 node_modules
@@ -41,10 +41,6 @@ Thumbs.db
 .nx/cache
 .nx/workspace-data
 
-# Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
-vite.config.*.timestamp*
+# Next.js
+.next
+out

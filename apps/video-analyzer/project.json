@@ -1,8 +1,9 @@
 {
   "name": "video-analyzer",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/video-analyzer",
   "projectType": "application",
-  "sourceRoot": "apps/video-analyzer/src",
+  "tags": [],
   "// targets": "to see all targets run: nx show project video-analyzer --web",
   "targets": {}
 }
