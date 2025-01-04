@@ -12,6 +12,7 @@
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.8.0",
+    "@nx-extend/shadcn-ui": "^4.2.1",
     "@nx/cypress": "20.3.0",
     "@nx/eslint": "20.3.0",
     "@nx/eslint-plugin": "20.3.0",
