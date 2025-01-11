@@ -1,4 +1,5 @@
 import styles from './page.module.scss';
+import { useTranslations } from 'next-intl';
 
 export default function Index() {
   /*
@@ -6,6 +7,9 @@ export default function Index() {
    *
    * Note: The corresponding styles are in the ./index.tailwind file.
    */
+  const t = useTranslations('HomePage');
+
+
   return (
     <div>
       <div className="wrapper">
@@ -14,6 +18,7 @@ export default function Index() {
             <h1 className="font-bold font-mono text-4xl text-green-400">
               <span> Hello there, </span>
               Welcome video-analyzer 👋
+              {t('about')}
             </h1>
           </div>
 
