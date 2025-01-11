@@ -1,4 +1,4 @@
-import './global.css';
+import '@swimetrics/utils/global.css'
 
 export const metadata = {
   title: 'Welcome to video-analyzer',

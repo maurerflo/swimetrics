@@ -1,7 +1,10 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/cypress/**/*",
@@ -51,7 +54,9 @@
   ],
   "targetDefaults": {
     "e2e-ci--**/*": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     }
   },
   "generators": {
@@ -60,6 +65,9 @@
         "style": "scss",
         "linter": "eslint"
       }
+    },
+    "@nx/react": {
+      "library": {}
     }
   }
 }

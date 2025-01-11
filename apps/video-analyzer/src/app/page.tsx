@@ -11,7 +11,7 @@ export default function Index() {
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
-            <h1>
+            <h1 className="font-bold font-mono text-4xl text-green-400">
               <span> Hello there, </span>
               Welcome video-analyzer 👋
             </h1>

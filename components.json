@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": false,
+  "tailwind": {
+    "config": "apps/utils/src/tailwind.config.ts",
+    "css": "apps/utils/src/global.css",
+    "baseColor": "neutral",
+    "cssVariables": true
+  },
+  "aliases": {
+    "ui": "@swimetrics/components",
+    "components": "@swimetrics/components/components",
+    "utils": "@swimetrics/utils",
+    "hooks": "@swimetrics/components/hooks"
+  }
+}
