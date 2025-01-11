@@ -99,3 +99,12 @@ And join the Nx community:
 - [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
 - [Our Youtube channel](https://www.youtube.com/@nxdevtools)
 - [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+
+## Saas Boilerplate Inspiratoon
+https://github.com/eckdev/nextjs-lemonsqueezy-boilerplate (next, nextAuth, Prisma, pg, LemonSqueezy, shadcn/ui)
+https://github.com/boxyhq/saas-starter-kit (next, pg, Prisma, SamlJackson, Stripe, NextAuth)
+https://github.com/nextacular/nextacular (Next, Tailwind, NextAuth, Prisma, Postgres, Stripe)
+https://github.com/ixartz/SaaS-Boilerplate (Next, Tailwind, Cler, next-int, PGlite, Storybook, DrizzleORM)
+https://github.com/ixartz/Next-js-Boilerplate (Next, Tailwind, Cler, next-int, PGlite, Storybook, DrizzleORM)
+
