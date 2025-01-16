@@ -3,6 +3,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { routing } from '../../i18n/routing';
 import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
+import { SidebarProvider, SidebarTrigger } from '@swimetrics/components/sidebar';
+import { AppSidebar } from '../../components/app-sidebar';
 
 export const metadata = {
   title: 'Welcome to video-analyzer',
@@ -25,7 +27,15 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <NextIntlClientProvider messages={messages}>
-          {children}
+
+          <SidebarProvider>
+            <AppSidebar />
+            <main>
+              <SidebarTrigger />
+              {children}
+            </main>
+          </SidebarProvider>
+
         </NextIntlClientProvider>
       </body>
     </html>
