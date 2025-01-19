@@ -2,5 +2,11 @@
   "HomePage": {
     "title": "Hello world!",
     "about": "Go to the about page"
+  },
+  "HeroSection": {
+    "design_for": "Design Simplified For",
+    "dev": "Developers",
+    "caption": "Seamless UI components for developers who want speed and flexibility.",
+    "button": "Sign In"
   }
 }

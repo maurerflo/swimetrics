@@ -81,6 +81,7 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
+  not_before_policy  Int?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

@@ -1,10 +1,4 @@
 import '@swimetrics/utils/global.css';
-import { NextIntlClientProvider } from 'next-intl';
-import { routing } from '../../i18n/routing';
-import { notFound } from 'next/navigation';
-import { getMessages } from 'next-intl/server';
-import { SidebarProvider, SidebarTrigger } from '@swimetrics/components/sidebar';
-import { AppSidebar } from '../../components/app-sidebar';
 
 export const metadata = {
   title: 'Welcome to video-analyzer',
@@ -13,31 +7,8 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
-  params: { locale },
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) {
-  if (!routing.locales.includes(locale as any)) {
-    notFound();
-  }
-  const messages = await getMessages();
-
-  return (
-    <html lang="en">
-      <body>
-        <NextIntlClientProvider messages={messages}>
-
-          <SidebarProvider>
-            <AppSidebar />
-            <main>
-              <SidebarTrigger />
-              {children}
-            </main>
-          </SidebarProvider>
-
-        </NextIntlClientProvider>
-      </body>
-    </html>
-  );
+  return <main>{children}</main>;
 }

@@ -1,5 +1,5 @@
 'use client';
-import { useSession, signIn } from "next-auth/react";
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -8,7 +8,9 @@ export default function Dashboard() {
     return (
       <div>
         <p>You must be signed in to view this page.</p>
-        <button onClick={() => signIn("keycloak")}>Sign In with Keycloak</button>
+        <button onClick={() => signIn('keycloak')}>
+          Sign In with Keycloak
+        </button>
       </div>
     );
   }
@@ -18,12 +20,10 @@ export default function Dashboard() {
       <div>
         <p>Welcome, {session.user.name}!</p>
         <p>Email: {session.user.email}</p>
+        <button onClick={() => signOut({ callbackUrl: '/' })}>Sign Out</button>
       </div>
     );
   }
 
-  return (
-    <div>foo</div>
-  )
-
+  return <div>foo</div>;
 }

@@ -2,5 +2,11 @@
   "HomePage": {
     "title": "Hello world!",
     "about": "gehe zur hallo seite"
+  },
+  "HeroSection": {
+    "design_for": "Design einfach für",
+    "dev": "Entwikler",
+    "caption": "Nahtlose UI-Komponenten für Entwickler, die Geschwindigkeit und Flexibilität wünschen.",
+    "button": "Anmelden"
   }
 }

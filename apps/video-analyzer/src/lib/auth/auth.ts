@@ -5,32 +5,33 @@ import { prisma } from '../prisma/prisma';
 
 const prismaAdapter = PrismaAdapter(prisma);
 prismaAdapter.linkAccount = async (data: any) => {
+  data['not_before_policy'] = data['not-before-policy'];
   delete data['not-before-policy'];
-  prisma.account.create({ data });
+  return prisma.account.create({ data });
 };
 
 export const authConfig: AuthOptions = {
   adapter: prismaAdapter,
-  debug: true,
   providers: [
     KeycloakProvider({
       clientId: process.env.KEYCLOAK_CLIENT_ID || '',
       clientSecret: process.env.KEYCLOAK_CLIENT_SECRET || '',
-      issuer: process.env.KEYCLOAK_ISSUER || '', // Keycloak Base URL + Realm, e.g., "https://keycloak.example.com/realms/myrealm"
+      issuer: process.env.KEYCLOAK_ISSUER || '',
     }),
   ],
+  session: {
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60,
+  },
+  pages: {
+    signIn: '/auth/signin',
+  },
   callbacks: {
-    async session({ session, token }) {
-      // if (session.user) {
-      //   session.user.id = token.sub; // Add Keycloak user ID to session
-      // }
-
-      // console.log('session', session);
-      return session;
-    },
-    async jwt({ token, account }) {
+    async jwt({ token, account, user }) {
       if (account) {
-        token.accessToken = account.access_token; // Store access token for API calls
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
+        token.id = user?.id || account.providerAccountId;
       }
       return token;
     },
