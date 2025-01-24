@@ -87,3 +87,32 @@ model Authenticator {
 
   @@id([userId, credentialID])
 }
+
+
+model Workout {
+  id        String   @id @default(cuid())
+  date      DateTime
+  coach     String
+  location  String
+  group     String
+  focus     String
+  sections  Section[]
+}
+
+model Section {
+  id          String       @id @default(cuid())
+  name        String
+  workoutId   String
+  workout     Workout      @relation(fields: [workoutId], references: [id])
+  workoutSets WorkoutSet[]
+}
+
+model WorkoutSet {
+  id         String   @id @default(cuid())
+  repetition Int
+  distance   Int
+  stroke     String
+  details    Json
+  sectionId  String
+  section    Section  @relation(fields: [sectionId], references: [id])
+}
