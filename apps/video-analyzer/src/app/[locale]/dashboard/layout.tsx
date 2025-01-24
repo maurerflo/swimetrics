@@ -1,9 +1,9 @@
 import '@swimetrics/utils/global.css';
 import { SidebarProvider } from '@swimetrics/components/sidebar';
-import { AppSidebar } from '../../../components/app-sidebar';
-import { ProfileDropdown } from '../../../components/profile-dropdown';
-import { Main } from '../../../components/main';
-import { Header } from '../../../components/header';
+import { AppSidebar } from '../../../components/app-sidebar/app-sidebar';
+import { ProfileDropdown } from '../../../components/profile-dropdown/profile-dropdown';
+import { Main } from '../../../components/main/main';
+import { Header } from '../../../components/header/header';
 
 export default async function Layout({
   children,
