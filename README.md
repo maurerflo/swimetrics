@@ -108,3 +108,13 @@ https://github.com/nextacular/nextacular (Next, Tailwind, NextAuth, Prisma, Post
 https://github.com/ixartz/SaaS-Boilerplate (Next, Tailwind, Cler, next-int, PGlite, Storybook, DrizzleORM)
 https://github.com/ixartz/Next-js-Boilerplate (Next, Tailwind, Cler, next-int, PGlite, Storybook, DrizzleORM)
 
+## auth
+https://docs.socotra.com/configuration/frontEndSdk/guides/keycloak-with-nextjs.html
+
+
+https://shadcn-admin.netlify.app/users
+https://github.com/satnaing/shadcn-admin/blob/main/src/routeTree.gen.ts
+
+https://www.shadcnblocks.com/blocks
+https://21st.dev/s/menu
+https://www.builtatlightspeed.com/

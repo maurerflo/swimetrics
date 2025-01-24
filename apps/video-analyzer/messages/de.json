@@ -2,5 +2,17 @@
   "HomePage": {
     "title": "Hello world!",
     "about": "gehe zur hallo seite"
+  },
+  "HeroSection": {
+    "design_for": "Trainingsplanung einfach für",
+    "dev": "Coaches",
+    "caption": "Nahtlose UI-Komponenten für Entwickler, die Geschwindigkeit und Flexibilität wünschen.",
+    "button": "Anmelden"
+  },
+  "ProfileDropdownComponent":{
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "logout": "Abmelden",
+    "billing": "Abrechnung"
   }
 }
