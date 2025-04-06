@@ -2,46 +2,28 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Swimetrics Documentation
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to the official documentation for Swimetrics - a comprehensive sports analytics platform for swimming performance analysis.
 
-## Getting Started
+## About Swimetrics
 
-Get started by **creating a new site**.
+Swimetrics combines advanced data analytics with video analysis to provide coaches and swimmers with actionable insights. Our platform helps track progress, identify areas for improvement, and optimize training regimens through data-driven decision making.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Platform Overview
 
-### What you'll need
+Our platform consists of several integrated components:
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- **Analytics Dashboard**: Real-time performance metrics and historical data analysis
+- **Video Analysis**: Synchronized video playback with performance data overlay
+- **Training Management**: Tools for planning and tracking training programs
+- **Team Collaboration**: Features for coaches and athletes to communicate and share insights
 
-## Generate a new site
+## Need Help?
 
-Generate a new Docusaurus site using the **classic template**.
+If you encounter any issues or have questions while using Swimetrics:
 
-The classic template will automatically be added to your project after you run the command:
+- Check the troubleshooting guides
+- Search the documentation
 
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3001/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+We're continuously improving our platform and documentation. Your feedback helps us make Swimetrics better!
