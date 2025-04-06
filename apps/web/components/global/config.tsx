@@ -127,6 +127,6 @@ export const headerMenuItems: GlobalHeaderMenuItem[] = [
     },
 ]
 export const auth = {
-    login: {title: "Login", url: "#"},
-    signup: {title: "Sign up", url: "#"},
+    login: {title: "Login", url: "/auth/signin"},
+    signup: {title: "Sign up", url: "/auth/signup"},
 }

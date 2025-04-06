@@ -2,6 +2,7 @@ import NextAuth, {NextAuthConfig} from "next-auth";
 import Keycloak from "next-auth/providers/keycloak";
 import {PrismaAdapter} from "@auth/prisma-adapter";
 import {prisma} from "@repo/database";
+import Nodemailer from "next-auth/providers/nodemailer";
 
 const prismaAdapter = PrismaAdapter(prisma);
 
@@ -13,14 +14,19 @@ export const authConfig: NextAuthConfig = {
             clientSecret: process.env.KEYCLOAK_CLIENT_SECRET || "",
             issuer: process.env.KEYCLOAK_ISSUER || "",
         }),
+        Nodemailer({
+            server: process.env.EMAIL_SERVER,
+            from: process.env.EMAIL_FROM,
+        }),
     ],
     session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60,
     },
-    // pages: {
-    //     signIn: "/auth/signin",
-    // },
+    pages: {
+        signIn: "/auth/signin",
+        signOut: "/auth/signout",
+    },
     callbacks: {
         async jwt({token, account, user}) {
             console.log("foo");

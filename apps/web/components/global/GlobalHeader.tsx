@@ -12,6 +12,7 @@ import {
 } from "@repo/ui/components/navigation-menu";
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@repo/ui/components/sheet";
 import {GlobalHeaderMenuItem, LogoMenueItem} from "@/components/global/model";
+import Link from "next/link";
 
 
 interface GlobalHeaderProps {
@@ -97,10 +98,10 @@ export const GlobalHeader = ({
 
                                     <div className="flex flex-col gap-3">
                                         <Button asChild variant="outline">
-                                            <a href={auth.login.url}>{auth.login.title}</a>
+                                            <Link href={auth.login.url}>{auth.login.title}</Link>
                                         </Button>
                                         <Button asChild>
-                                            <a href={auth.signup.url}>{auth.signup.title}</a>
+                                            <Link href={auth.signup.url}>{auth.signup.title}</Link>
                                         </Button>
                                     </div>
                                 </div>
