@@ -36,6 +36,8 @@ Copy the example environment file and update with your local settings. The value
 
 ```bash
 cp .env.example .env
+
+cp /apps/web/.env.sample /apps/web/.env
 ```
 
 ## Start surrounding Systems
@@ -94,11 +96,7 @@ pnpm run db:migrate --name your_migration_name
 pnpm run db:deploy
 ```
 
-
 </details>
-
-
-
 
 ## Development Environment
 
@@ -110,24 +108,21 @@ pnpm run dev
 
 This will launch the application on http://localhost:3000 and the docs on http://localhost:3009.
 
-## Project Structure
-
-```
-swimetrics/
-├── apps/
-│   ├── docs/         # Documentation (Docusaurus)
-│   └── web/          # Main web application
-├── packages/
-│   ├── database/                # Prisma Database models and migrations
-│   ├── eslint-config/           # ESLint configuration
-│   ├── typescript-config/   # TypeScript configuration
-│   ├── ui/                             # Shared UI components
-└── package.json      # Root package.json
-```
 
 # Next Steps
 
-Now that you have the development environment set up, explore the following:
-Review the Core Concepts section to understand the system architecture
-Check out the API Reference to learn about available endpoints
-Visit the Frontend Components guide to understand the UI structure
+
+Open the app in your browser at [http://localhost:3000](http://localhost:3000) sign up with an email and test the app.  
+
+<details>
+<summary>Where does the mails do get send to?</summary>
+
+On local setup the mails are sent to the local mailcatcher. You can access it at [http://localhost:1080](http://localhost:1080).
+
+</details>
+
+
+Read the full documentation at [http://localhost:3009](http://localhost:3009).
+
+
+

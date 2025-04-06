@@ -21,7 +21,6 @@ Documentation: Docusaurus for technical documentation
 ## Infrastructure
 The application is containerized using Docker Compose with the following services:
 
-
 PostgreSQL database
 MinIO object storage
 Node.js application server
