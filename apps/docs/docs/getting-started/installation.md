@@ -38,6 +38,8 @@ Copy the example environment file and update with your local settings. The value
 cp .env.example .env
 
 cp /apps/web/.env.sample /apps/web/.env
+
+cp /libs/.env.sample /apps/web/.env
 ```
 
 ## Start surrounding Systems
@@ -61,6 +63,11 @@ This will start all required services with the configuration defined in the .env
 ## Prisma Setup
 
 Swimetrics uses Prisma ORM to manage database connections and models. Follow these steps to set up Prisma:
+
+First go to the database package:
+```
+cd packages/database
+```
 
 Generate the Prisma client:
 
@@ -100,7 +107,7 @@ pnpm run db:deploy
 
 ## Development Environment
 
-Start the development server:
+Start the development server from the root of the project:
 
 ```bash
 pnpm run dev
