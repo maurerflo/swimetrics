@@ -1,31 +1,61 @@
 import {auth} from "@/lib/auth/auth";
 import {redirect} from 'next/navigation';
-import {SideNav} from "@/components/dashboard/side-nav";
-import {Header} from "@/components/dashboard/header";
+import type {Metadata} from "next";
+import {SidebarInset, SidebarProvider, SidebarTrigger} from "@repo/ui/components/sidebar";
+import {DashboardSidebar} from "@/components/dashboard/DashboardSidebar";
+import {Separator} from "@repo/ui/components/separator";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList, BreadcrumbPage,
+    BreadcrumbSeparator
+} from "@repo/ui/components/breadcrumb";
 
-export const metadata = {
-    title: 'Meondi Tender Ninja - Dashboard',
-    description: 'A comprehensive system for managing tenders',
+export const metadata: Metadata = {
+    title: "Swimetrics | Datalytics for swimming ",
+    description: "Sports analytics for swimming",
 };
 
-export default async function DashboardLayout({children}: {
+export default async function DashboardLayout({children}: Readonly<{
     children: React.ReactNode;
-}) {
+}>) {
 
     const session = await auth()
-    if (!session) {
+    if (!session?.user) {
         redirect("/auth/signin");
     }
 
     return (
+
         <div className="flex min-h-screen">
-            <SideNav/>
-            <div className="flex-1 pl-64">
-                <Header/>
-                <main className="container mx-auto p-8">
-                    {children}
-                </main>
-            </div>
+            <SidebarProvider>
+                <DashboardSidebar/>
+                <SidebarInset>
+                    <header className="flex h-16 shrink-0 items-center gap-2">
+                        <div className="flex items-center gap-2 px-4">
+                            <SidebarTrigger className="-ml-1"/>
+                            <Separator orientation="vertical" className="mr-2 h-4"/>
+                            <Breadcrumb>
+                                <BreadcrumbList>
+                                    <BreadcrumbItem className="hidden md:block">
+                                        <BreadcrumbLink href="#">
+                                            Dashboard
+                                        </BreadcrumbLink>
+                                    </BreadcrumbItem>
+                                    <BreadcrumbSeparator className="hidden md:block"/>
+                                    <BreadcrumbItem>
+                                        <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                                    </BreadcrumbItem>
+                                </BreadcrumbList>
+                            </Breadcrumb>
+                        </div>
+                    </header>
+                    <main className="container mx-auto p-8">
+                        {children}
+                    </main>
+                </SidebarInset>
+            </SidebarProvider>
         </div>
     );
 }
