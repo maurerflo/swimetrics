@@ -46,12 +46,11 @@ cp /libs/.env.sample /apps/web/.env
 
 Surrounding Systems
 
-Swimetrics relies on the several sourrunding services that need to be running. Check system context to understand the architecture.:
-
+Swimetrics relies on the several surrounding services that need to be running. Check system context to understand the architecture.:
 Start these services using Docker Compose:
 
 ```bash
-# unsing docker 
+# using docker 
 docker compose -f docker-compose.dev.yaml up -d
 
 # or using podman
