@@ -1,3 +1,5 @@
+import {ScrollArea} from '@repo/ui/scrollArea'
+
 export function VideoMenagement(){
     return (
         <>
@@ -35,7 +37,6 @@ export function VideoMenagement(){
                     </tbody>
                 </table>
             </div>
-            <ScrollArea></ScrollArea>
         </>
     )
 }
