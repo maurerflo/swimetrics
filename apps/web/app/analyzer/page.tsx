@@ -12,17 +12,21 @@ export const metadata: Metadata = {
 export default function Analyzer() {
     return (
 <>
-    <div className="grid grid-cols-4 gab-1">
-        <div className="">
-            <VideoMenagement></VideoMenagement>
+    <div className="flex flex-col h-screen bg-gray-100">
+        {/* Top section */}
+        <div className="flex-1 flex">
+            <div className="w-1/4 p-4 bg-white shadow-md overflow-y-auto">
+                <VideoMenagement></VideoMenagement>
+            </div>
+            <div className="w-1/2 p-4 bg-gray-200 flex flex-col">
+                <VideoPlayer></VideoPlayer>
+            </div>
+            <div className="w-1/4 p-4 bg-white shadow-md">
+                <Tools></Tools>
+            </div>
         </div>
-        <div className="col-span-2">
-            <VideoPlayer></VideoPlayer>
-        </div>
-        <div className="">
-            <Tools></Tools>
-        </div>
-        <div className="col-span-3">
+        
+        <div className="h-40 bg-gray-300 p-4">
             <TimeLine></TimeLine>
         </div>
     </div>
