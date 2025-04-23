@@ -1,11 +1,20 @@
+import React from 'react'
 import { FaPlay, FaPause, FaForward, FaBackward } from '../../../../packages/ui/node_modules/react-icons/fa';
 import { Canvas } from "./canvas";
+import ReactPlayer from '../../../../packages/ui/node_modules/react-player';
 
 export function VideoPlayer() {
     return (
         <>
         <div className="flex-1 bg-black relative">
             {/* Video players would go here */}
+            <ReactPlayer
+              url="https://www.example.com/video.mp4"
+              playing
+              controls
+              width="100%"
+              height="100%"
+            />
             {/* Drawing canvas would be overlaid on top of videos */}
             <Canvas></Canvas>
         </div>
