@@ -8,8 +8,8 @@ export function TimeLine() {
             {/* Timeline tools */}
             <button className="p-2 bg-gray-400 rounded"><FaPlay /></button>
             <button className="p-2 bg-gray-400 rounded"><FaPause /></button>
-            <button className="p-2 bg-gray-400 rounded"><FaForward /></button>
             <button className="p-2 bg-gray-400 rounded"><FaBackward /></button>
+            <button className="p-2 bg-gray-400 rounded"><FaForward /></button>
             <button className="p-2 bg-gray-400 rounded"><FaScissors /></button>
             </div>
             <div className="bg-white h-24 rounded shadow-inner">
