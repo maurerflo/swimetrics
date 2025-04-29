@@ -1,3 +1,5 @@
+'use client'
+
 import { FaPen, FaDrawPolygon, FaCircle, FaRuler } from '../../../../packages/ui/node_modules/react-icons/fa';
 
 const tools = [
