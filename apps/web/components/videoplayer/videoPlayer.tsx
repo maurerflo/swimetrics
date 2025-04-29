@@ -72,7 +72,7 @@ export function VideoPlayer() {
                 <button className="p-2 bg-blue-900 text-white rounded">
                     <FaForward />
                 </button>
-                <select className="p-2 bg-white rounded">
+                <select className="p-2 bg-white rounded" defaultValue={1}>
                     <option value={0.5}>0.5x</option>
                     <option value={1}>1x</option>
                     <option value={1.5}>1.5x</option>
