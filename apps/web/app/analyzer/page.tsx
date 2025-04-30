@@ -11,53 +11,63 @@ import {Metadata} from "next";
 export default function Analyzer() {
     const [showVideoManager, setShowVideoManager] = useState(true);
     const [showTools, setShowTools] = useState(true);
-    const [topSectionHeight, setTopSectionHeight] = useState('auto');
+    const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
 
     useEffect(() => {
-        const handleResize = () => {
-            const windowHeight = window.innerHeight;
-            const timelineHeight = windowHeight/4
-            const topSectionMaxHeight = windowHeight - timelineHeight;
-            setTopSectionHeight(`${topSectionMaxHeight}px`);
-        };
+        function handleResize() {
+            setDimensions({
+                height: window.innerHeight,
+                width: window.innerWidth
+            });
+        }
 
         handleResize();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const timelineHeight = Math.max(80, dimensions.height * 0.20); // 20% of screen height, minimum 80px
+    const topSectionHeight = dimensions.height - timelineHeight;
+    const videoPlayerHeight = Math.min(topSectionHeight, dimensions.width); // 80% of top section or 45% of width, whichever is smaller
+
     return (
-        <>
-            <div className="flex flex-col min-h-screen bg-gray-100">
-                {/* Top section */}
-                <div className={`flex-1 flex flex-col md:flex-row ${showVideoManager || showTools ? 'overflow-y-auto' : ''}`} style={{ maxHeight: topSectionHeight }}>
-                    <div className={`w-full md:w-1/6 p-4 bg-white shadow-md transition-all duration-300 ${showVideoManager ? 'block' : 'hidden md:block'}`}>
-                        <button
-                            className="md:hidden mb-4"
-                            onClick={() => setShowVideoManager(!showVideoManager)}
-                        >
-                            {showVideoManager ? 'Hide Video Manager' : 'Show Video Manager'}
-                        </button>
-                        <VideoMenagement></VideoMenagement>
-                    </div>
-                    <div className="w-full md:w-2/3 p-4 bg-gray-200 flex flex-col flex-grow">
-                        <VideoPlayer></VideoPlayer>
-                    </div>
-                    <div className={`w-full md:w-1/6 p-4 bg-white shadow-md transition-all duration-300 ${showTools ? 'block' : 'hidden md:block'}`}>
-                        <button
-                            className="md:hidden mb-4"
-                            onClick={() => setShowTools(!showTools)}
-                        >
-                            {showTools ? 'Hide Tools' : 'Show Tools'}
-                        </button>
-                        <Tools></Tools>
+        <div className="flex flex-col h-screen overflow-hidden bg-gray-100">
+            {/* Top section */}
+            <div className="flex flex-grow" style={{ height: `${topSectionHeight}px` }}>
+                <div className={`w-1/6 bg-white shadow-md transition-all duration-300 ${showVideoManager ? 'block' : 'hidden md:block'}`}>
+                    <button
+                        className="md:hidden p-2 w-full text-xs"
+                        onClick={() => setShowVideoManager(!showVideoManager)}
+                    >
+                        {showVideoManager ? 'Hide Video Manager' : 'Show Video Manager'}
+                    </button>
+                    <div className="overflow-auto h-full p-2">
+                        <VideoMenagement />
+                        {timelineHeight} <br />
+                        {topSectionHeight} <br />
+                        {videoPlayerHeight} <br />
                     </div>
                 </div>
-                
-                <div className="timeline h-1/4 bg-gray-300 p-4">
-                    <TimeLine></TimeLine>
+                <div className={`bg-gray-200 flex-grow overflow-hidden flex items-center justify-center h-[${videoPlayerHeight}px] w-[${videoPlayerHeight * 16 / 9}px] max-w-full`}>
+                    <VideoPlayer />
+                </div>
+                <div className={`w-1/6 bg-white shadow-md transition-all duration-300 ${showTools ? 'block' : 'hidden md:block'}`}>
+                    <button
+                        className="md:hidden p-2 w-full text-xs"
+                        onClick={() => setShowTools(!showTools)}
+                    >
+                        {showTools ? 'Hide Tools' : 'Show Tools'}
+                    </button>
+                    <div className="overflow-auto h-full p-2">
+                        <Tools />
+                    </div>
                 </div>
             </div>
-        </>
+            
+            {/* Timeline section */}
+            <div className="bg-gray-300 flex-shrink-0" style={{ height: `${timelineHeight}px` }}>
+                <TimeLine />
+            </div>
+        </div>
     )
 }
