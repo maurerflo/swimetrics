@@ -85,7 +85,7 @@ export function VideoPlayer() {
     return (
         <div ref={containerRef} className="flex flex-col bg-gray-300 p-2 w-full h-full">
             <div className="flex-grow flex items-center justify-center">
-                <div className={`grid ${playerLayout === 'single' ? '' : playerLayout === 'double' ? 'grid-cols-2' : 'grid-cols-2 grid-rows-2'} gap-2 w-full h-full`}>
+                <div className={`grid ${playerLayout === 'single' ? '' : playerLayout === 'double' ? 'grid-cols-2' : 'grid-cols-2 grid-rows-2'} w-full h-full`}>
                     {[...Array(playerLayout === 'single' ? 1 : playerLayout === 'double' ? 2 : 4)].map((_, index) => (
                         <div key={index} className="relative flex items-center justify-center">
                             <video 

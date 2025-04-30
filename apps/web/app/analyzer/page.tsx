@@ -43,9 +43,6 @@ export default function Analyzer() {
                     </button>
                     <div className="overflow-auto h-full p-2">
                         <VideoMenagement />
-                        {timelineHeight} <br />
-                        {topSectionHeight} <br />
-                        {videoPlayerHeight} <br />
                     </div>
                 </div>
                 <div className={`bg-gray-200 flex-grow overflow-hidden flex items-center justify-center h-[${videoPlayerHeight}px] w-[${videoPlayerHeight * 16 / 9}px] max-w-full`}>
@@ -65,7 +62,7 @@ export default function Analyzer() {
             </div>
             
             {/* Timeline section */}
-            <div className="bg-gray-300 flex-shrink-0" style={{ height: `${timelineHeight}px` }}>
+            <div className="bg-gray-300 flex-shrink-0 border-t-2 border-gray-400 p-2" style={{ height: `${timelineHeight}px` }}>
                 <TimeLine />
             </div>
         </div>
