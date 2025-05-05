@@ -82,6 +82,12 @@ export function VideoPlayer() {
         }
     }
 
+    function handleProgressChange(event) {
+        videoRefs.current.forEach((videoRef) =>{
+            if (videoRef) videoRef.currentTime = event.target.currentTime;
+        })
+    }
+
     return (
         <div ref={containerRef} className="flex flex-col bg-gray-300 p-2 w-full h-full">
             <div className="flex-grow flex items-center justify-center">
@@ -92,11 +98,17 @@ export function VideoPlayer() {
                                 src="https://ik.imagekit.io/ikmedia/example_video.mp4" 
                                 ref={addVideoRef}
                                 className="object-contain max-w-full max-h-full"
+                                onTimeUpdate={handleProgressChange}
                             />
                             <Canvas />
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className='flex justify-center w-full'>
+                <progress 
+                    value={videoRefs.current[0] ? videoRefs.current[0].currentTime : 0} 
+                    max={videoRefs.current[0] ? videoRefs.current[0].duration: 100} ></progress>
             </div>
             <div className="flex justify-center space-x-2 mt-2">
                 <button className="p-1 bg-blue-900 text-white rounded text-xs" onClick={revert10}>
