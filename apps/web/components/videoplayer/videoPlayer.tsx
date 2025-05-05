@@ -107,8 +107,12 @@ export function VideoPlayer() {
             </div>
             <div className='flex justify-center w-full'>
                 <progress 
+                    className='w-full h-1'
                     value={videoRefs.current[0] ? videoRefs.current[0].currentTime : 0} 
-                    max={videoRefs.current[0] ? videoRefs.current[0].duration: 100} ></progress>
+                    max={videoRefs.current[0] ? videoRefs.current[0].duration: 100}
+                >
+
+                </progress>
             </div>
             <div className="flex justify-center space-x-2 mt-2">
                 <button className="p-1 bg-blue-900 text-white rounded text-xs" onClick={revert10}>
