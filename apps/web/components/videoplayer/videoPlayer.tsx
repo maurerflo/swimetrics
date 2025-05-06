@@ -10,9 +10,17 @@ export function VideoPlayer() {
     const [playing, setPlaying] = useState(false);
     const [playerLayout, setPlayerLayout] = useState('single')
     const [progress, setProgress] = useState(0);
+    const [longestDuration, setLongestDuration] = useState(0);
     const videoRefs = useRef([]);
     const containerRef = useRef(null)
     const progressBarRef = useRef(null)
+
+    const videoSources = [
+        "https://ik.imagekit.io/ikmedia/example_video.mp4",
+        "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4",
+        "https://videos.pexels.com/video-files/4114797/4114797-uhd_2560_1440_25fps.mp4",
+        "https://videos.pexels.com/video-files/5532774/5532774-uhd_2732_1440_25fps.mp4"
+    ];
 
     useEffect(() => {
         const resizeObserver = new ResizeObserver(adjustVideoSize);
@@ -23,19 +31,29 @@ export function VideoPlayer() {
     }, [playerLayout]);
 
     useEffect(() => {
+        const handleTimeUpdate = () => {
+            const maxCurrentTime = Math.max(
+                ...videoRefs.current.map(ref => ref ? ref.currentTime : 0)
+            );
+            setProgress((maxCurrentTime / longestDuration) * 100);
+        };
+
         videoRefs.current.forEach((videoRef) => {
             if (videoRef) {
-                videoRef.addEventListener('timeupdate', handleProgress);
+                videoRef.addEventListener('loadedmetadata', updateLongestDuration);
+                videoRef.addEventListener('timeupdate', handleTimeUpdate);
             }
         });
+
         return () => {
             videoRefs.current.forEach((videoRef) => {
                 if (videoRef) {
-                    videoRef.removeEventListener('timeupdate', handleProgress);
+                    videoRef.removeEventListener('loadedmetadata', updateLongestDuration);
+                    videoRef.removeEventListener('timeupdate', handleTimeUpdate);
                 }
             });
         };
-    }, []);
+    }, [longestDuration]);
 
     function adjustVideoSize() {
         if (containerRef.current) {
@@ -69,21 +87,20 @@ export function VideoPlayer() {
         }
     }
 
-    function handleProgress() {
-        const video = videoRefs.current[0]; // Use the first video as reference
-        if (video) {
-            const percent = (video.currentTime / video.duration) * 100;
-            setProgress(percent);
-        }
+    function updateLongestDuration() {
+        const maxDuration = Math.max(
+            ...videoRefs.current.map(ref => ref ? ref.duration : 0)
+        );
+        setLongestDuration(maxDuration);
     }
 
     function handleSeek(e) {
         const progressBar = progressBarRef.current;
         if (progressBar) {
-            const seekTime = (e.nativeEvent.offsetX / progressBar.offsetWidth) * videoRefs.current[0].duration;
+            const seekTime = (e.nativeEvent.offsetX / progressBar.offsetWidth) * longestDuration;
             videoRefs.current.forEach((videoRef) => {
                 if (videoRef) {
-                    videoRef.currentTime = seekTime;
+                    videoRef.currentTime = Math.min(seekTime, videoRef.duration);
                 }
             });
         }
@@ -98,17 +115,18 @@ export function VideoPlayer() {
         });
     }
 
-    function skip10(){
-        videoRefs.current.forEach((videoRef) =>{
-            if (videoRef) videoRef.currentTime += 10;
-        })
+    function skip10() {
+        videoRefs.current.forEach((videoRef) => {
+            if (videoRef) videoRef.currentTime =  Math.min(videoRef.currentTime + 10, videoRef.duration).toFixed(2);
+        });
     }
 
-    function revert10(){
-        videoRefs.current.forEach((videoRef) =>{
-            if (videoRef) videoRef.currentTime -= 10;
-        })
+    function revert10() {
+        videoRefs.current.forEach((videoRef) => {
+            if (videoRef) videoRef.currentTime = Math.max(videoRef.currentTime - 10, 0).toFixed(2);
+        });
     }
+
     function handleLayoutChange(event) {
         setPlayerLayout(event.target.value);
     }
@@ -126,7 +144,7 @@ export function VideoPlayer() {
                     {[...Array(playerLayout === 'single' ? 1 : playerLayout === 'double' ? 2 : 4)].map((_, index) => (
                         <div key={index} className="relative flex items-center justify-center">
                             <video 
-                                src="https://ik.imagekit.io/ikmedia/example_video.mp4" 
+                                src={videoSources[index]}
                                 ref={addVideoRef}
                                 className="object-contain max-w-full max-h-full"
                             />
@@ -142,7 +160,7 @@ export function VideoPlayer() {
                     onClick={handleSeek}
                 >
                     <div 
-                        className="bg-green-700 h-full rounded-full transition-all duration-300 ease-in-out"
+                        className="bg-blue-500 h-full rounded-full transition-all duration-300 ease-in-out"
                         style={{ width: `${progress}%` }}
                     ></div>
                 </div>
