@@ -9,8 +9,10 @@ export function VideoPlayer() {
     
     const [playing, setPlaying] = useState(false);
     const [playerLayout, setPlayerLayout] = useState('single')
+    const [progress, setProgress] = useState(0);
     const videoRefs = useRef([]);
     const containerRef = useRef(null)
+    const progressBarRef = useRef(null)
 
     useEffect(() => {
         const resizeObserver = new ResizeObserver(adjustVideoSize);
@@ -19,6 +21,21 @@ export function VideoPlayer() {
         }
         return () => resizeObserver.disconnect();
     }, [playerLayout]);
+
+    useEffect(() => {
+        videoRefs.current.forEach((videoRef) => {
+            if (videoRef) {
+                videoRef.addEventListener('timeupdate', handleProgress);
+            }
+        });
+        return () => {
+            videoRefs.current.forEach((videoRef) => {
+                if (videoRef) {
+                    videoRef.removeEventListener('timeupdate', handleProgress);
+                }
+            });
+        };
+    }, []);
 
     function adjustVideoSize() {
         if (containerRef.current) {
@@ -47,6 +64,26 @@ export function VideoPlayer() {
                 if (videoRef) {
                     videoRef.style.width = `${videoWidth}px`;
                     videoRef.style.height = `${videoHeight}px`;
+                }
+            });
+        }
+    }
+
+    function handleProgress() {
+        const video = videoRefs.current[0]; // Use the first video as reference
+        if (video) {
+            const percent = (video.currentTime / video.duration) * 100;
+            setProgress(percent);
+        }
+    }
+
+    function handleSeek(e) {
+        const progressBar = progressBarRef.current;
+        if (progressBar) {
+            const seekTime = (e.nativeEvent.offsetX / progressBar.offsetWidth) * videoRefs.current[0].duration;
+            videoRefs.current.forEach((videoRef) => {
+                if (videoRef) {
+                    videoRef.currentTime = seekTime;
                 }
             });
         }
@@ -82,12 +119,6 @@ export function VideoPlayer() {
         }
     }
 
-    function handleProgressChange(event) {
-        videoRefs.current.forEach((videoRef) =>{
-            if (videoRef) videoRef.currentTime = event.target.currentTime;
-        })
-    }
-
     return (
         <div ref={containerRef} className="flex flex-col bg-gray-300 p-2 w-full h-full">
             <div className="flex-grow flex items-center justify-center">
@@ -98,21 +129,23 @@ export function VideoPlayer() {
                                 src="https://ik.imagekit.io/ikmedia/example_video.mp4" 
                                 ref={addVideoRef}
                                 className="object-contain max-w-full max-h-full"
-                                onTimeUpdate={handleProgressChange}
                             />
                             <Canvas />
                         </div>
                     ))}
                 </div>
             </div>
-            <div className='flex justify-center w-full'>
-                <progress 
-                    className='w-full h-1'
-                    value={videoRefs.current[0] ? videoRefs.current[0].currentTime : 0} 
-                    max={videoRefs.current[0] ? videoRefs.current[0].duration: 100}
+            <div className='flex justify-center w-full mt-2'>
+                <div 
+                    ref={progressBarRef}
+                    className="bg-gray-200 h-2 w-full rounded-full cursor-pointer"
+                    onClick={handleSeek}
                 >
-
-                </progress>
+                    <div 
+                        className="bg-green-700 h-full rounded-full transition-all duration-300 ease-in-out"
+                        style={{ width: `${progress}%` }}
+                    ></div>
+                </div>
             </div>
             <div className="flex justify-center space-x-2 mt-2">
                 <button className="p-1 bg-blue-900 text-white rounded text-xs" onClick={revert10}>
