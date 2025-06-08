@@ -43,9 +43,10 @@ export function VideoMenagement(){
                     <h2 className="text-lg font-bold mb-4">Video Selection</h2>
                     {/* Add video selection functionality here */}
                     <div className="flex">
-                        <div className="flex bg-red-400 ">
+                        <div className="flex bg-red-400 w-full m-2 p-2">
                             <video src="https://videos.pexels.com/video-files/5532774/5532774-uhd_2732_1440_25fps.mp4"/>
-                            <span>Tags</span>
+                            <span>Name</span>
+                            <div>Tags</div>
                             <span>Duration</span>
                         </div>
                     </div>
